@@ -98,7 +98,7 @@ local UI = ({
     keybind_list = nil,
     themes = {
         Default = {
-            accent = color3_rgb(95, 201, 201),
+            accent = color3_rgb(189, 172, 255),
             risky = color3_rgb(200, 0, 0),
             background = color3_rgb(17, 17, 17),
             outline = color3_rgb(27, 27, 27),
@@ -3238,7 +3238,7 @@ function UI:Configs(tab)
 end;
 
 function UI:Themes(tab)
-    tab:dropdown({name = "Themes", description = "Custom themes for Menu", options = {"Default", "blue baby", "quantum", "off white", "the hub", "fatality", "gamesense"}, default = "blue baby", flag = "theme_list", callback = function(state)
+    tab:dropdown({name = "Themes", description = "Custom themes for Menu", options = {"Default", "blue baby", "quantum", "off white", "the hub", "fatality", "gamesense"}, default = "Default", flag = "theme_list", callback = function(state)
         UI:LoadTheme(state);
     end});
 end;
