@@ -3196,7 +3196,7 @@ function UI:Configs(tab)
             local config_name = UI.flags["cfg_name"];
             if config_name ~= "" and not isfile("CONFIGS/" .. config_name .. ".cfg") then
                 writefile("CONFIGS/" .. config_name .. ".cfg", UI:GetConfig());
-                    tab.notification("created config [".. config_name .."].", 5, color3_new(0, 1, 0))
+                    UI.notification("created config [".. config_name .."].", 5, color3_new(0, 1, 0))
                 cfg_list()
             end;
         end);
@@ -3207,7 +3207,7 @@ function UI:Configs(tab)
             local selected_config = UI.flags["cfg_list"];
             if selected_config then
                 writefile("CONFIGS/" .. selected_config .. ".cfg", UI:GetConfig());
-                    tab.notification("saved config [".. selected_config .."].", 5, color3_new(0, 1, 0))
+                    UI.notification("saved config [".. selected_config .."].", 5, color3_new(0, 1, 0))
                 cfg_list()
             end;
         end);
@@ -3218,7 +3218,7 @@ function UI:Configs(tab)
             local selected_config = UI.flags["cfg_list"];
             if selected_config then
                 UI:LoadConfig(readfile("CONFIGS/" .. selected_config .. ".cfg"));
-                    tab.notification("loaded config [".. selected_config .."].", 5, color3_new(0, 1, 0))
+                    UI.notification("loaded config [".. selected_config .."].", 5, color3_new(0, 1, 0))
                 cfg_list()
             end;
         end);
@@ -3229,7 +3229,7 @@ function UI:Configs(tab)
             local selected_config = UI.flags["cfg_list"];
             if selected_config then
                 delfile("CONFIGS/" .. selected_config .. ".cfg");
-                    tab.notification("deleted config [".. selected_config .."].", 5, color3_new(1, 0, 0))
+                    UI.notification("deleted config [".. selected_config .."].", 5, color3_new(1, 0, 0))
                 cfg_list()
             end;
         end);
