@@ -96,54 +96,94 @@ local UI = ({
     watermark_gui = nil,
     keybind_screen_gui = nil,
     keybind_list = nil,
-    themes = {
+    s = {
         Default = {
             accent = color3_rgb(189, 172, 255),
             risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(17, 17, 17),
-            outline = color3_rgb(27, 27, 27),
+            background = color3_rgb(18, 18, 18),
+            outline = color3_rgb(32, 32, 32),
             active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(120, 120, 120)
+            inactive = color3_rgb(36, 36, 36)
         },
         fatality = {
             accent = color3_rgb(130, 0, 69),
             risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(17, 17, 17),
-            outline = color3_rgb(27, 27, 27),
+            background = color3_rgb(18, 18, 18),
+            outline = color3_rgb(32, 32, 32),
             active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(120, 120, 120)
+            inactive = color3_rgb(36, 36, 36)
+        },
+        phantom = {
+            accent = color3_rgb(85, 0, 136),
+            risky = color3_rgb(220, 20, 60),
+            background = color3_rgb(20, 20, 30),
+            outline = color3_rgb(40, 40, 50),
+            active = color3_rgb(240, 240, 255),
+            inactive = color3_rgb(50, 50, 60)
+        },
+        neonpulse = {
+            accent = color3_rgb(0, 255, 180),
+            risky = color3_rgb(255, 50, 80),
+            background = color3_rgb(10, 10, 10),
+            outline = color3_rgb(25, 25, 25),
+            active = color3_rgb(255, 255, 255),
+            inactive = color3_rgb(40, 40, 40)
+        },
+        sunset = {
+            accent = color3_rgb(255, 94, 77),
+            risky = color3_rgb(255, 70, 70),
+            background = color3_rgb(28, 20, 20),
+            outline = color3_rgb(48, 36, 36),
+            active = color3_rgb(255, 240, 230),
+            inactive = color3_rgb(50, 40, 40)
+        },
+        glacier = {
+            accent = color3_rgb(0, 170, 255),
+            risky = color3_rgb(200, 30, 60),
+            background = color3_rgb(18, 24, 30),
+            outline = color3_rgb(36, 44, 50),
+            active = color3_rgb(220, 240, 255),
+            inactive = color3_rgb(44, 52, 60)
+        },
+        toxin = {
+            accent = color3_rgb(130, 255, 0),
+            risky = color3_rgb(255, 0, 50),
+            background = color3_rgb(16, 18, 14),
+            outline = color3_rgb(36, 38, 30),
+            active = color3_rgb(245, 255, 230),
+            inactive = color3_rgb(38, 40, 32)
         },
         gamesense = {
             accent = color3_rgb(180, 228, 128),
             risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(17, 17, 17),
-            outline = color3_rgb(27, 27, 27),
+            background = color3_rgb(18, 18, 18),
+            outline = color3_rgb(32, 32, 32),
             active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(120, 120, 120)
+            inactive = color3_rgb(36, 36, 36)
         },
         quantum = {
             accent = color3_rgb(195, 0, 0),
             risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(17, 17, 17),
-            outline = color3_rgb(27, 27, 27),
+            background = color3_rgb(18, 18, 18),
+            outline = color3_rgb(32, 32, 32),
             active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(120, 120, 120)
+            inactive = color3_rgb(36, 36, 36)
         },
         ["blue baby"] = {
             accent = color3_rgb(0, 255, 255),
             risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(17, 17, 17),
-            outline = color3_rgb(27, 27, 27),
+            background = color3_rgb(18, 18, 18),
+            outline = color3_rgb(32, 32, 32),
             active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(120, 120, 120)
+            inactive = color3_rgb(36, 36, 36)
         },
         ["the hub"] = {
             accent = color3_rgb(255,163,26),
             risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(17, 17, 17),
-            outline = color3_rgb(27, 27, 27),
+            background = color3_rgb(18, 18, 18),
+            outline = color3_rgb(32, 32, 32),
             active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(120, 120, 120)
+            inactive = color3_rgb(36, 36, 36)
         },
     },
     instancemap = {},
@@ -175,16 +215,16 @@ local UI = ({
         ping = 0
     },
 })
-function UI:LoadTheme(themeName)
-    if self.themes[themeName] then
-        self.currentTheme = themeName;
+function UI:Load(Name)
+    if self.s[Name] then
+        self.current = Name;
         for obj, data in pairs(self.instancemap) do
-            UI:AttachTheme(obj, data.Properties);
+            UI:Attach(obj, data.Properties);
         end;
     end;
 end;
-function UI:AttachTheme(obj, props)
-    local activeTheme = self.currentTheme or "Default";
+function UI:Attach(obj, props)
+    local active = self.currentTheme or "Default";
 
     self.instancemap[obj] = { Instance = obj, Properties = props };
 
@@ -839,7 +879,7 @@ do -- menu
             Hue.Image = "http://www.roblox.com/asset/?id=138435236878653"
             Hue.AutoButtonColor = false
             Hue.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
-            Hue.BorderColor3 = Color3.fromRGB(17, 17, 17)
+            Hue.BorderColor3 = Color3.fromRGB(18, 18, 18)
             Hue.Position = UDim2.new(0, 7, 1, -35)
             Hue.Size = UDim2.new(0, 164, 0, 10)
 
@@ -3238,7 +3278,7 @@ function UI:Configs(tab)
 end;
 
 function UI:Themes(tab)
-    tab:dropdown({name = "Themes", description = "Custom themes for Menu", options = {"Default", "blue baby", "quantum", "off white", "the hub", "fatality", "gamesense"}, default = "Default", flag = "theme_list", callback = function(state)
+    tab:dropdown({name = "Themes", description = "Custom themes for Menu", options = {"Default", "blue baby", "quantum", "off white", "the hub", "fatality", "gamesense", "phantom", "neonpulse", "sunset", "glacier", "toxin"}, default = "Default", flag = "theme_list", callback = function(state)
         UI:LoadTheme(state);
     end});
 end;
