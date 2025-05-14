@@ -1,4 +1,4 @@
-local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/framework.lua", true))();
+local framework = loadstring(game:HttpGet(""https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/framework.lua", true))();
 --
 do -- checks
     do -- folders
@@ -23,17 +23,6 @@ do -- checks
         end;
     end;
 end;
---
-if (not LPH_OBFUSCATED) then
-    function LPH_NO_VIRTUALIZE(f) return f end;
-    function LPH_JIT(...) return ... end;
-    function LPH_JIT_MAX(...) return ... end;
-    function LPH_NO_UPVALUES(f) return (function(...) return f(...) end) end;
-    function LPH_ENCSTR(...) return ... end;
-    function LPH_ENCNUM(...) return ... end;
-    function LPH_CRASH() return print(debug.traceback()) end;
-end;
---
 -- math
 local udim2 = UDim2.new;
 local udim = UDim.new;
@@ -47,10 +36,7 @@ local uis = cloneref(services["userInputService"]);
 local tween_service = cloneref(services["tweenService"]);
 local camera = cloneref(services.Workspace["CurrentCamera"]);
 local lighting = cloneref(services["lighting"]);
-local stats = game.GetService(game, "Stats");
 -- vars
-local fps = stats.Workspace["Heartbeat"];
-local ping = stats.Network.ServerStatsItem["Data Ping"];
 local viewport_size = camera["ViewportSize"];
 local lplr = players["LocalPlayer"];
 local user = lplr["Name"];
@@ -90,65 +76,11 @@ local fonts = {
 local UI = ({
     autoload = true,
     font = Font.new([[rbxassetid://12187365977]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal),
-    font_size = 12,
+    font_size = 12;
     ui_key = Enum.KeyCode.Delete,
     menu_gui = nil,
     watermark_gui = nil,
-    keybind_screen_gui = nil,
-    keybind_list = nil,
-    s = {
-        Default = {
-            accent = color3_rgb(189, 172, 255),
-            risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(18, 18, 18),
-            outline = color3_rgb(32, 32, 32),
-            active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(36, 36, 36)
-        },
-        fatality = {
-            accent = color3_rgb(130, 0, 69),
-            risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(18, 18, 18),
-            outline = color3_rgb(32, 32, 32),
-            active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(36, 36, 36)
-        },
-        gamesense = {
-            accent = color3_rgb(180, 228, 128),
-            risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(18, 18, 18),
-            outline = color3_rgb(32, 32, 32),
-            active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(36, 36, 36)
-        },
-        quantum = {
-            accent = color3_rgb(195, 0, 0),
-            risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(18, 18, 18),
-            outline = color3_rgb(32, 32, 32),
-            active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(36, 36, 36)
-        },
-        ["blue baby"] = {
-            accent = color3_rgb(0, 255, 255),
-            risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(18, 18, 18),
-            outline = color3_rgb(32, 32, 32),
-            active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(36, 36, 36)
-        },
-        ["the hub"] = {
-            accent = color3_rgb(255,163,26),
-            risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(18, 18, 18),
-            outline = color3_rgb(32, 32, 32),
-            active = color3_rgb(255, 255, 255),
-            inactive = color3_rgb(36, 36, 36)
-        },
-    },
-    instancemap = {},
-    notifications = {};
-
+    themes = ({ accent = color3_rgb(131,135,250), risky = color3_rgb(85, 0, 0), background = color3_rgb(7,7,8), outline = color3_rgb(15,15,16), inactive = color3_rgb(69,69,70) }),
     keys = {
         [Enum.KeyCode.LeftShift] = "L-SHIFT", [Enum.KeyCode.RightShift] = "R-SHIFT", [Enum.KeyCode.LeftControl] = "L-CTRL",
         [Enum.KeyCode.RightControl] = "R-CTRL", [Enum.KeyCode.LeftAlt] = "L-ALT", [Enum.KeyCode.RightAlt] = "R-ALT",
@@ -168,37 +100,13 @@ local UI = ({
     user_data = {
         username = (user or "User"),
         uid = 1
-    },
+    };
     shared = {
         initialized = false,
         fps = 0,
         ping = 0
     },
-})
-function UI:Load(Name)
-    if self.s[Name] then
-        self.current = Name;
-        for obj, data in pairs(self.instancemap) do
-            UI:Attach(obj, data.Properties);
-        end;
-    end;
-end;
-function UI:Attach(obj, props)
-    local active = self.currentTheme or "Default";
-
-    self.instancemap[obj] = { Instance = obj, Properties = props };
-
-    for property, themeKey in pairs(props) do
-        if self.themes[activeTheme] and self.themes[activeTheme][themeKey] then
-            obj[property] = self.themes[activeTheme][themeKey];
-        end;
-    end;
-end;
-function UI:GetSelectedThemeAndAccent()
-    local activeTheme = self.currentTheme or "Default";
-    local accentColor = self.themes[activeTheme].accent ;
-    return activeTheme, accentColor;
-end;
+});
 --
 local flags = {};
 UI.__index = UI;
@@ -347,7 +255,7 @@ do -- other
     blur_effect = cloneref(Instance.new("BlurEffect", lighting));
     black_bg = Instance_manager.new("TextButton", {
         Name = "bg_effect";
-        Text = "CELESTIAL.PUB";
+        Text = "";
         AutoButtonColor = false;
         Size = udim2(9999, 0, 9999, 0);
         BorderColor3 = UI.themes.outline;
@@ -361,151 +269,6 @@ do -- other
 end
 --
 do -- menu
-    function UI:Notification(message, duration, color, player)
-        local notification = {
-            Container = nil, Objects = {}
-        };
-    
-        local notif_ui = cloneref(Instance.new("ScreenGui", gethui()))
-        local notifcontainer = Instance.new('Frame', notif_ui)
-        local outline = Instance.new("Frame")
-        local inline = Instance.new("Frame")
-        local value = Instance.new("TextLabel")
-        local uipadding = Instance.new("UIPadding")
-        local time_line = Instance.new("Frame")
-        local base_position = Vector2.new(25, 65) -- fixed X, starting Y position for notifications
-        local player_image = Instance.new("ImageLabel")
-    
-        do -- properties
-            notif_ui.Name = "notification"
-            notif_ui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-            notif_ui.IgnoreGuiInset = Enum.ScreenInsets.DeviceSafeInsets
-            notif_ui.IgnoreGuiInset = true
-            UI.noti_screen_gui = notif_ui
-    
-            notifcontainer.Name = "container"
-            notifcontainer.Position = UDim2.new(0, base_position.X, 0, base_position.Y + (#UI.notifications * 25))
-            notifcontainer.AutomaticSize = Enum.AutomaticSize.X
-            notifcontainer.Size = UDim2.new(0, 0, 0, 18)
-            notifcontainer.BackgroundColor3 = Color3.new(1, 1, 1)
-            notifcontainer.BackgroundTransparency = 1
-            notifcontainer.BorderSizePixel = 0
-            notifcontainer.BorderColor3 = Color3.new(0, 0, 0)
-            notifcontainer.ZIndex = 99999999
-            notification.Container = notifcontainer
-    
-            outline.Name = "outline"
-            outline.AutomaticSize = Enum.AutomaticSize.X
-            outline.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            outline.Position = UDim2.new(0.01, 0, 0.02, 0)
-            outline.Size = UDim2.new(0, 0, 0, 18)
-            outline.Parent = notifcontainer
-            outline.BackgroundTransparency = 1
-            table.insert(notification.Objects, outline)
-
-            UI:AttachTheme(outline, { BackgroundColor3 = "background" })
-    
-            inline.Name = "inline"
-            inline.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
-            inline.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            inline.BorderSizePixel = 0
-            inline.Position = UDim2.new(0, 1, 0, 0)
-            inline.Size = UDim2.new(1, 0, 1, -1)
-            inline.BackgroundTransparency = 1
-            inline.Parent = outline
-            table.insert(notification.Objects, inline)
-    
-            if player then
-                local imagedata = players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
-                player_image.Image = imagedata
-                player_image.Size = UDim2.new(0, 14, 0, 14)
-                player_image.Position = UDim2.new(0, 4, 0.8, -13)
-                player_image.BackgroundTransparency = 1
-                player_image.Parent = inline
-                value.Position = UDim2.new(0, 20, 0, 0)
-                table.insert(notification.Objects, player_image)
-            end
-    
-            value.Name = "text"
-            value.Text = message
-            value.TextColor3 = Color3.fromRGB(255, 255, 255)
-            value.TextStrokeTransparency = 0
-            value.TextXAlignment = Enum.TextXAlignment.Left
-            value.AutomaticSize = Enum.AutomaticSize.X
-            value.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-            value.BackgroundTransparency = 1
-            value.Size = UDim2.new(0, 0, 1, 0)
-            value.TextTransparency = 1
-            value.Parent = inline
-            value.FontFace = UI.font
-            value.TextSize = UI.font_size
-            table.insert(notification.Objects, value)
-    
-            uipadding.Name = "uipadding"
-            uipadding.PaddingLeft = UDim.new(0, 5)
-            uipadding.PaddingRight = UDim.new(0, 5)
-            uipadding.PaddingTop = UDim.new(0, 1)
-            uipadding.Parent = value
-    
-            time_line.Name = "timeline"
-            time_line.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            time_line.BorderSizePixel = 0
-            time_line.Size = UDim2.new(0, 0, 1, 0) -- start at 0 size
-            time_line.Parent = outline
-            time_line.BackgroundTransparency = 1
-            time_line.BackgroundColor3 = color
-            time_line.ZIndex = -1
-            table.insert(notification.Objects, time_line)
-        end
-    
-        function notification:remove()
-            local index = table.find(UI.notifications, notification)
-            if index then
-                for _, v in ipairs(notification.Objects) do
-                    if v:IsA("Frame") or v:IsA("ImageLabel") then
-                        tween_service:Create(v, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1}):Play()
-                    elseif v:IsA("TextLabel") then
-                        tween_service:Create(v, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()
-                    end
-                end
-    
-                task.wait(0.5)
-                table.remove(UI.notifications, table.find(UI.notifications, notification))
-                notif_ui:Destroy()
-                notification.Container:Destroy()
-    
-                for i = index, #UI.notifications do
-                    local notif = UI.notifications[i]
-                    local newPosition = UDim2.new(0, base_position.X, 0, base_position.Y + (i - 1) * 25)
-                    tween_service:Create(notif.Container, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = newPosition}):Play()
-                end
-            end
-        end
-    
-        task.spawn(function()
-            outline.AnchorPoint = Vector2.new(1, 0)
-            for _, v in next, notification.Objects do
-                if v:IsA("Frame") then
-                    tween_service:Create(v, TweenInfo.new(1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {BackgroundTransparency = 0}):Play()
-                elseif v:IsA("ImageLabel") then
-                    tween_service:Create(v, TweenInfo.new(1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {BackgroundTransparency = 0}):Play()
-                end
-            end
-            tween_service:Create(outline, TweenInfo.new(1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {AnchorPoint = Vector2.new(0, 0)}):Play()
-            tween_service:Create(value, TweenInfo.new(1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
-            tween_service:Create(player_image, TweenInfo.new(1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {ImageTransparency = 0}):Play()
-            tween_service:Create(time_line, TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 1, 0)}):Play()
-    
-            task.wait(duration)
-            notification:remove()
-        end)
-    
-        table.insert(UI.notifications, notification)
-        notifcontainer.Position = UDim2.new(0, base_position.X, 0, base_position.Y + (#UI.notifications - 1) * 25)
-    
-        return notification
-    end
-    --
     function UI:watermark(properties)
         local watermark = {
             name = (properties.Name or properties.name or "watermark text | placeholder");
@@ -521,7 +284,9 @@ do -- menu
 
         local outline = Instance_manager.new("Frame", {
             Name = "watermark_outline";
-            AutomaticSize = Enum.AutomaticSize.X; 
+            AutomaticSize = Enum.AutomaticSize.X;
+            BackgroundColor3 = UI.themes.background;
+            BorderColor3 = UI.themes.outline;
             Position = udim2(0.5, 0, 0.02, 0);
             BorderSizePixel = 1;
             AnchorPoint = vec2(0.5, 0);
@@ -530,18 +295,14 @@ do -- menu
             Parent = watermark_ui;
         });
 
-        UI:AttachTheme(outline, { BackgroundColor3 = "background" })
-        UI:AttachTheme(outline, { BorderColor3 = "outline" })   
-
         local Inline = Instance_manager.new("Frame", {
             Name = "watermark_inline";
+            BackgroundColor3 = UI.themes.background;
             BorderSizePixel = 0;
             Position = udim2(0, 1, 0, 1);
             Size = udim2(1, -2, 1, -2);
             Parent = outline;
         });
-
-        UI:AttachTheme(Inline, { BackgroundColor3 = "background" })
 
         local Value = Instance_manager.new("TextLabel", {
             FontFace = UI.font;
@@ -644,6 +405,7 @@ do -- menu
 
             ColorWindow.Name = "ColorWindow"
             ColorWindow.AnchorPoint = Vector2.new(0.5, 0.5)
+            ColorWindow.BackgroundColor3 = UI.themes.outline
             ColorWindow.BorderColor3 = Color3.fromRGB(0, 0, 0)
             ColorWindow.Parent = Icon
             ColorWindow.Position = UDim2.new(1, 0, 1, 2)
@@ -652,20 +414,17 @@ do -- menu
             ColorWindow.ZIndex = 99
             ColorWindow.Visible = false
 
-            UI:AttachTheme(ColorWindow, { BackgroundColor3 = "outline" })
-
             Instance_manager.new("UICorner", {
                 Parent = ColorWindow;
                 CornerRadius = udim(0, 6);
             });
 
             ColorInline.Name = "ColorInline"
+            ColorInline.BackgroundColor3 = UI.themes.background
             ColorInline.BorderColor3 = Color3.fromRGB(0, 0, 0)
             ColorInline.BorderSizePixel = 0
             ColorInline.Position = UDim2.new(0, 1, 0, 1)
             ColorInline.Size = UDim2.new(1, -2, 1, -2)
-
-            UI:AttachTheme(ColorInline, { BackgroundColor3 = "background" })
 
             Instance_manager.new("UICorner", {
                 Parent = ColorInline;
@@ -690,11 +449,10 @@ do -- menu
             text_color.TextStrokeTransparency = 0
             text_color.TextSize = UI.font_size
             text_color.AutoButtonColor = false
+            text_color.BackgroundColor3 = UI.themes.background
+            text_color.BorderColor3 = UI.themes.outline
             text_color.Position = UDim2.new(0, 7, 1, -17)
             text_color.Size = UDim2.new(0, 76, 0, 12)
-
-            UI:AttachTheme(text_color, { BackgroundColor3 = "background" })
-            UI:AttachTheme(text_color, { BorderColor3 = "outline" })
 
             text_color2.Name = "Text Color 2"
             text_color2.FontFace = UI.font
@@ -703,11 +461,10 @@ do -- menu
             text_color2.TextStrokeTransparency = 0
             text_color2.TextSize = UI.font_size
             text_color2.AutoButtonColor = false
+            text_color2.BackgroundColor3 = UI.themes.background
+            text_color2.BorderColor3 = UI.themes.outline
             text_color2.Position = UDim2.new(0, 90, 1, -17)
             text_color2.Size = UDim2.new(0, 80, 0, 12)
-
-            UI:AttachTheme(text_color2, { BackgroundColor3 = "background" })
-            UI:AttachTheme(text_color2, { BorderColor3 = "outline" })
 
             text_color_outline.Name = "Outline"
             text_color_outline.BackgroundTransparency = 1
@@ -727,10 +484,9 @@ do -- menu
             Color.TextSize = UI.font_size
             Color.AutoButtonColor = false
             Color.BackgroundColor3 = default
+            Color.BorderColor3 = UI.themes.background
             Color.Position = UDim2.new(0, 6, 0, 30)
             Color.Size = UDim2.new(0, 145, 1, -74)
-
-            UI:AttachTheme(Color, { BorderColor3 = "background" })
 
             Instance_manager.new("UICorner", {
                 Parent = Color;
@@ -744,12 +500,11 @@ do -- menu
             Color_Circle.TextSize = UI.font_size
             Color_Circle.AutoButtonColor = false
             Color_Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Color_Circle.BorderColor3 = UI.themes.background
             Color_Circle.Position = UDim2.new(0.5, -25, 0.5, -25)
             Color_Circle.Size = UDim2.new(0, 7, 0, 7)
             Color_Circle.Parent = Color
             Color_Circle.ZIndex = 9
-
-            UI:AttachTheme(Color_Circle, { BorderColor3 = "background" })
 
             Instance_manager.new("UICorner", {
                 Parent = Color_Circle;
@@ -839,7 +594,7 @@ do -- menu
             Hue.Image = "http://www.roblox.com/asset/?id=138435236878653"
             Hue.AutoButtonColor = false
             Hue.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
-            Hue.BorderColor3 = Color3.fromRGB(18, 18, 18)
+            Hue.BorderColor3 = Color3.fromRGB(17, 17, 17)
             Hue.Position = UDim2.new(0, 7, 1, -35)
             Hue.Size = UDim2.new(0, 164, 0, 10)
 
@@ -1043,7 +798,7 @@ do -- menu
     do -- window
         function UI:window(options)
             local window = {
-                name = (options.Name or options.name or " Celestial");
+                name = (options.Name or options.name or "Celestial");
                 size = (options.Size or options.size or udim2(0, 750, 0, 500));
                 position = (options.position == "left" and Enum.TextXAlignment.Left) or (options.position == "center" and Enum.TextXAlignment.Center) or (options.position == "right" and Enum.TextXAlignment.Right) or Enum.TextXAlignment.Left,
                 dragging = { false, udim2(0, 0, 0, 0) };
@@ -1054,7 +809,7 @@ do -- menu
             };
             --
             local menu = Instance_manager.new("ScreenGui", {
-                Name = " menu";
+                Name = "menu";
                 Parent = cloneref(gethui());
                 IgnoreGuiInset = Enum.ScreenInsets.DeviceSafeInsets;
                 ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
@@ -1067,18 +822,17 @@ do -- menu
                 Text = "";
                 AutoButtonColor = false;
                 AnchorPoint = vec2(0.5, 0.5);
+                BackgroundColor3 = UI.themes.background;
+                BorderColor3 = UI.themes.outline;
                 Position = udim2(0.5, 0, 0.5, 0);
                 BorderSizePixel = 1;
                 Size = window.size;
-                ZIndex = 9999;
             });
 
-            UI:AttachTheme(background, { BackgroundColor3 = "background" })
-            UI:AttachTheme(background, { BorderColor3 = "outline" })
-
-            local line_thing = Instance_manager.new("Frame", {
+            Instance_manager.new("Frame", {
                 Name = "line";
                 ZIndex = 10;
+                BackgroundColor3 = UI.themes.accent;
                 BackgroundTransparency = 1; -- later add checks
                 BorderColor3 = color3_rgb(0, 0, 0);
                 BorderSizePixel = 0;
@@ -1087,10 +841,9 @@ do -- menu
                 Parent = background;
             });
 
-            UI:AttachTheme(line_thing, { BackgroundColor3 = "accent" })
-
-            local line_thingy2 = Instance_manager.new("Frame", {
+            Instance_manager.new("Frame", {
                 Name = "line";
+                BackgroundColor3 = UI.themes.outline;
                 BorderColor3 = color3_rgb(0, 0, 0);
                 BorderSizePixel = 0;
                 Position = udim2(0, 80, 0, 0);
@@ -1098,17 +851,15 @@ do -- menu
                 Parent = background;
             });
 
-            UI:AttachTheme(line_thingy2, { BackgroundColor3 = "outline" })
-
             local tabs_holder = Instance_manager.new("Frame", {
                 Name = "tabs_holder";
                 BackgroundTransparency = 1;
+                BackgroundColor3 = UI.themes.background;
                 BorderColor3 = color3_rgb(0, 0, 0);
                 BorderSizePixel = 0;
                 Size = udim2(0, 80, 0, 500);
                 Parent = background;
             });
-            UI:AttachTheme(tabs_holder, { BackgroundColor3 = "background" })
             --
             local page_holder = Instance_manager.new("Frame", {
                 Name = "page_holder";
@@ -1158,115 +909,6 @@ do -- menu
                     end
                 end);
             end
-            --
-            function window:keybind_list() 
-                local NKeyList = {Keybinds = {}};
-                UI.keybind_list = NKeyList;
-                
-                local keybind = cloneref(Instance.new("ScreenGui", gethui()))
-                local Background = Instance.new("Frame")
-                local TopLine = Instance.new("Frame")
-                local Name_Holder = Instance.new("Frame")
-                local Name = Instance.new("TextLabel")
-                local Tab = Instance.new("Frame")
-                local UIListLayout = Instance.new("UIListLayout")
-    
-                keybind.Name = "KeyBind List"
-                keybind.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-                keybind.IgnoreGuiInset = Enum.ScreenInsets.DeviceSafeInsets
-                UI.keybind_screen_gui = keybind
-                
-                Background.Name = "Background"
-                Background.BackgroundColor3 = Color3.fromRGB(11, 11, 11)
-                Background.BorderColor3 = Color3.fromRGB(25, 25, 25)
-                Background.Position = UDim2.new(0.01, 0, 0.488, 0)
-                Background.Size = UDim2.new(0, 164, 0, 24)
-                Background.Visible = false
-                Background.AutomaticSize = Enum.AutomaticSize.XY
-                Background.Parent = keybind
-
-                TopLine.Name = "TopLine"
-                TopLine.BorderColor3 = Color3.fromRGB(25, 25, 25)
-                TopLine.Position = UDim2.new(0, 0, 0, 0)
-                TopLine.Size = UDim2.new(1, 0, 0, 1)
-                TopLine.Visible = true
-                TopLine.AutomaticSize = Enum.AutomaticSize.XY
-                TopLine.Parent = Background
-                UI:AttachTheme(TopLine, { BackgroundColor3 = "accent" })
-
-                Name_Holder.Name = "Name_Holder"
-                Name_Holder.BackgroundTransparency = 1
-                Name_Holder.Position = UDim2.new(0, 0, 0, 0)
-                Name_Holder.Visible = true
-                Name_Holder.Size = UDim2.new(0, 170, 0.4, 0) 
-                Name_Holder.AutomaticSize = Enum.AutomaticSize.XY
-                Name_Holder.Parent = Background
-        
-                Name.Name = "Name_List"
-                Name.Parent = Name_Holder
-                Name.BackgroundTransparency = 1
-                Name.BorderColor3 = Color3.fromRGB(25, 25, 25)
-                Name.BorderSizePixel = 0
-                Name.Size = UDim2.new(1, 0, 0, 25)
-                Name.FontFace = UI.font
-                Name.Text = "KeyBind List"
-                Name.TextStrokeTransparency = 0
-                Name.TextColor3 = Color3.fromRGB(255, 255, 255)
-                Name.TextSize = UI.font_size
-                Name.RichText = true
-
-                Tab.Name = "Tab"
-                Tab.Visible = true 
-                Tab.Parent = Background
-                Tab.BackgroundTransparency = 1.000
-                Tab.BorderColor3 = Color3.fromRGB(25, 25, 25)
-                Tab.Position = UDim2.new(0, 0, 0, 25)
-                Tab.Size = UDim2.new(1, 0, 0, -20)
-                Tab.AutomaticSize = Enum.AutomaticSize.Y
-
-                UI:AttachTheme(Tab, { BackgroundColor3 = "background" })
-        
-                UIListLayout.Parent = Tab
-                UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-                UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-                UIListLayout.Padding = UDim.new(0, 5)
-        
-                -- Functions
-                function NKeyList:SetVisible(State)
-                    Background.Visible = State;
-                end;
-                
-                function NKeyList:NewKey(Key, Name)
-                    local KName = Instance.new("TextLabel")
-                    local KeyValue = {}
-                    
-                    KName.Name = "Name"
-                    KName.Parent = Tab
-                    KName.AnchorPoint = Vector2.new(0.5, 0.5)
-                    KName.BackgroundColor3 = Color3.fromRGB(11, 11, 11)
-                    KName.BackgroundTransparency = 1
-                    KName.BorderColor3 = Color3.fromRGB(25, 25, 25)
-                    KName.BorderSizePixel = 0
-                    KName.Position = UDim2.new(0.5, 0, -1.85000002, 0)
-                    KName.Size = UDim2.new(0, 0, 0, 0)
-                    KName.FontFace = UI.font
-                    KName.TextColor3 = Color3.fromRGB(255, 255, 255)
-                    KName.TextSize = UI.font_size
-                    KName.AutomaticSize = Enum.AutomaticSize.XY
-                    
-                    function KeyValue:SetVisible(State)
-                        KName.Visible = State;
-                    end;
-                    
-                    function KeyValue:Update(NKey, NewName)
-                        KName.Text = string.format("%s: [%s]", NewName, tostring(NKey))
-                    end
-                                                                   
-                    return KeyValue
-                end;
-                return NKeyList
-            end
-            window:keybind_list()
 
             -- elements
             UI.holder = background;
@@ -1301,6 +943,7 @@ do -- menu
             --
             local tab_button = Instance_manager.new("TextButton", {
                 Name = page.name;
+                BackgroundColor3 = UI.themes.background;
                 AutoButtonColor = false;
                 BackgroundTransparency = 0;
                 BorderSizePixel = 0;
@@ -1309,7 +952,6 @@ do -- menu
                 Text = "";
                 Parent = page.window.elements.tab_holder;
             });
-            UI:AttachTheme(tab_button, { BackgroundColor3 = "background" })
             --
             local image_button = Instance_manager.new("ImageLabel", {
                 Name = page.name;
@@ -1318,15 +960,16 @@ do -- menu
                 BorderSizePixel = 0;
                 Position = udim2(0.5, -properties.size.X.Offset / 2, 0.5, -properties.size.Y.Offset / 2);
                 Size = properties.size;
+                ImageColor3 = UI.themes.inactive;
                 Parent = tab_button;
             });
-            UI:AttachTheme(image_button, { ImageColor3 = "inactive" })
             --
             local text_button = Instance_manager.new("TextLabel", {
                 Name = "Window_Name";
                 Text = string.upper(page.name);
                 FontFace = UI.font;
                 TextSize = UI.font_size;
+                TextColor3 = UI.themes.inactive;
                 BackgroundTransparency = 1;
                 TextStrokeTransparency = 0;
                 BorderSizePixel = 0;
@@ -1334,7 +977,6 @@ do -- menu
                 Size = udim2(1, 0, 1, 0);
                 Parent = tab_button;
             });
-            UI:AttachTheme(text_button, { TextColor3 = "inactive" })
             --
             local new_page = Instance_manager.new("Frame", {
                 Name = "new_page";
@@ -1350,13 +992,13 @@ do -- menu
             --
             local left = Instance_manager.new("ScrollingFrame", {
                 Name = "left";
+                BackgroundColor3 = UI.themes.background;
+                BorderColor3 = UI.themes.outline;
                 Size = UDim2.new(0.33, -10, 1, 0);
                 ScrollBarThickness = 0;
-                AutomaticCanvasSize = Enum.AutomaticSize.Y;
+                AutomaticCanvasSize = Enum.AutomaticSize.Y; 
                 Parent = new_page;
             });
-            UI:AttachTheme(left, { BackgroundColor3 = "background" })
-            UI:AttachTheme(left, { BorderColor3 = "outline" })
 
             Instance_manager.new("UIListLayout", {
                 Name = "UIListLayout";
@@ -1367,15 +1009,14 @@ do -- menu
 
             local center = Instance_manager.new("ScrollingFrame", {
                 Name = "center";
+                BackgroundColor3 = UI.themes.background;
+                BorderColor3 = UI.themes.outline;
                 Position = udim2(0.333, 3, 0, 0);
                 Size = udim2(0.333, -12, 1, 0);
                 ScrollBarThickness = 0;
                 AutomaticCanvasSize = Enum.AutomaticSize.Y;
                 Parent = new_page;
             });
-
-            UI:AttachTheme(center, { BackgroundColor3 = "background" })
-            UI:AttachTheme(center, { BorderColor3 = "outline" })
 
             Instance_manager.new("UIListLayout", {
                 Name = "UIListLayout";
@@ -1386,15 +1027,14 @@ do -- menu
 
             local right = Instance_manager.new("ScrollingFrame", {
                 Name = "right";
+                BackgroundColor3 = UI.themes.background;
+                BorderColor3 = UI.themes.outline;
                 Position = udim2(0.666, 6, 0, 0);
                 Size = udim2(0.333, -4, 1, 0);
                 ScrollBarThickness = 0;
                 AutomaticCanvasSize = Enum.AutomaticSize.Y;
                 Parent = new_page;
             });
-
-            UI:AttachTheme(right, { BackgroundColor3 = "background" })
-            UI:AttachTheme(right, { BorderColor3 = "outline" })
 
             Instance_manager.new("UIListLayout", {
                 Name = "UIListLayout";
@@ -1444,35 +1084,35 @@ do -- menu
                 for _, tween in ipairs(tweens) do
                     tween:Play()
                 end;
-  
+
                 tween_service:Create(tab_button, TweenInfo.new(0.3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
-                    BackgroundColor3 = UI:AttachTheme(tab_button, { BackgroundColor3 = bool and "outline" or "background" })
-                }):Play()                
+                    BackgroundColor3 = bool and UI.themes.outline or UI.themes.background,
+                }):Play()
 
                 tween_service:Create(image_button, TweenInfo.new(0.3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
-                    ImageColor3 = UI:AttachTheme(image_button, { ImageColor3 = bool and "accent" or "inactive" })
+                    ImageColor3 = bool and UI.themes.accent or UI.themes.inactive,
                 }):Play()
-                
+
                 tween_service:Create(text_button, TweenInfo.new(0.3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
-                    TextColor3 = UI:AttachTheme(text_button, { TextColor3 = bool and "accent" or "inactive" })
-                }):Play()                
+                    TextColor3 = bool and UI.themes.accent or UI.themes.inactive,
+                }):Play()
             end;
             --
             tab_button.MouseEnter:Connect(function()
                 if (not page.open) then
                     tween_service:Create(tab_button, TweenInfo.new(0.3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = UI:AttachTheme(tab_button, { BackgroundColor3 = "outline" })
+                        BackgroundColor3 = UI.themes.outline,
                     }):Play()
                 end
-            end)
-            
+            end);
+
             tab_button.MouseLeave:Connect(function()
                 if (not page.open) then
                     tween_service:Create(tab_button, TweenInfo.new(0.3, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = UI:AttachTheme(tab_button, { BackgroundColor3 = "background" })
+                        BackgroundColor3 = UI.themes.background,
                     }):Play()
                 end
-            end)            
+            end);
             --
             signals.connection(tab_button.MouseButton1Down, function()
                 if not page.open then
@@ -1521,18 +1161,18 @@ do -- menu
             Name = "top_section";
             BackgroundTransparency = 1;
             AutomaticSize = Enum.AutomaticSize.Y;
+            BackgroundColor3 = UI.themes.background;
             BorderColor3 = color3_rgb(0, 0, 0);
             Size = udim2(1, 0, 0, 20);
             Parent = (section.side == "left" and section.page.elements.left) or (section.side == "center" and section.page.elements.center) or (section.side == "right" and section.page.elements.right);
             ZIndex = 10 - #section.page.sections;
         });
 
-        UI:AttachTheme(top_section, { BackgroundColor3 = "background" })
-
         local title = Instance_manager.new("TextLabel", {
             Name = section.name;
             FontFace = UI.font;
             Text = string.upper(section.name);
+            TextColor3 = section.risky and UI.themes.risky or UI.themes.inactive;
             TextSize = UI.font_size;
             TextStrokeTransparency = 0;
             TextXAlignment = Enum.TextXAlignment.Left;
@@ -1543,8 +1183,6 @@ do -- menu
             Size = udim2(0, 186, 0, 20);
             Parent = top_section;
         });
-        
-        UI:AttachTheme(title, { TextColor3 = section.risky and "risky" or "inactive" })
 
         local section_content = Instance_manager.new("Frame", {
             Name = "section_content";
@@ -1607,12 +1245,11 @@ do -- menu
 
         local toggle_bg = Instance_manager.new("Frame", {
             Name = "toggle_bg";
+            BackgroundColor3 = UI.themes.outline;
             Position = udim2(0.81, 0, 0, 0);
             Size = udim2(0, 34, 0, 20);
             Parent = new_toggle;
         });
-
-        UI:AttachTheme(toggle_bg, { BackgroundColor3 = "outline" })
 
         Instance_manager.new("UICorner", {
             Parent = toggle_bg;
@@ -1621,24 +1258,24 @@ do -- menu
 
         local accent_bg = Instance_manager.new("Frame", {
             Name = "accent_bg";
+            BorderColor3 = UI.themes.outline;
             BorderSizePixel = 1;
             Position = udim2(0, 2, 0.5, -8);
             Size = udim2(0, 16, 0, 16);
             Parent = toggle_bg;
+            BackgroundColor3 = UI.themes.inactive;
         });
-
-        UI:AttachTheme(accent_bg, { BackgroundColor3 = "inactive" })
-        UI:AttachTheme(accent_bg, { BorderColor3 = "outline" })
 
         Instance_manager.new("UICorner", {
             Parent = accent_bg;
             CornerRadius = udim(1, 0);
         });
 
-        local some_text = Instance_manager.new("TextLabel", {
+        Instance_manager.new("TextLabel", {
             Name = "title";
             FontFace = UI.font;
             TextSize = UI.font_size;
+            TextColor3 = toggle.risk and UI.themes.risky or color3_rgb(255, 255, 255);
             TextStrokeTransparency = 0;
             TextXAlignment = Enum.TextXAlignment.Left;
             BackgroundColor3 = color3_rgb(255, 255, 255);
@@ -1647,15 +1284,15 @@ do -- menu
             BorderSizePixel = 0;
             Position = udim2(0, 0, 0, 0);
             Size = udim2(1, 0, 1, 0);
-            TextColor3 = toggle.risk and color3_rgb(125, 0, 0) or color3_rgb(255, 255, 255);
             Parent = new_toggle;
             Text = toggle.name;
         });
 
-        local some_text2 = Instance_manager.new("TextLabel", {
+        Instance_manager.new("TextLabel", {
             Name = "description";
             FontFace = UI.font;
             TextSize = UI.font_size;
+            TextColor3 = UI.themes.inactive;
             TextStrokeTransparency = 0;
             TextXAlignment = Enum.TextXAlignment.Left;
             BackgroundColor3 = color3_rgb(255, 255, 255);
@@ -1668,24 +1305,16 @@ do -- menu
             Text = toggle.description;
         });
 
-        UI:AttachTheme(some_text2, { TextColor3 = "inactive" })
-
         -- functions
         local function set_state()
-            toggle.toggled = not toggle.toggled
-            UI.flags[toggle.flag] = toggle.toggled
-            toggle.callback(toggle.toggled)
-
-            tween_service:Create(accent_bg, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { 
-                Position = toggle.toggled and UDim2.new(1, -18, 0.5, -8) or UDim2.new(0, 2, 0.5, -8)
-            }):Play()
-        
-            UI:AttachTheme(toggle_bg, { BackgroundColor3 = toggle.toggled and "accent" or "outline" })
-
-            tween_service:Create(accent_bg, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { 
-                BackgroundColor3 = UI:AttachTheme(accent_bg, { BackgroundColor3 = toggle.toggled and "active" or "inactive" })
-            }):Play()
-        end                  
+            toggle.toggled = not toggle.toggled;
+            UI.flags[toggle.flag] = toggle.toggled;
+            toggle.callback(toggle.toggled);
+            --
+            tween_service:Create(toggle_bg, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = toggle.toggled and UI.themes.accent or UI.themes.outline }):Play()
+            tween_service:Create(accent_bg, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { Position = toggle.toggled and udim2(1, -18, 0.5, -8) or udim2(0, 2, 0.5, -8) }):Play()
+            tween_service:Create(accent_bg, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = toggle.toggled and Color3.fromRGB(200, 200, 200) or UI.themes.inactive }):Play()
+        end
         signals.connection(new_toggle.MouseButton1Down, set_state);
 
         -- functions
@@ -1735,6 +1364,7 @@ do -- menu
 
         local Inline = Instance_manager.new("TextButton", {
             Name = "Slider_Inline",
+            BackgroundColor3 = UI.themes.outline,
             BorderColor3 = color3_rgb(0, 0, 0),
             BorderSizePixel = 0,
             Position = udim2(0, 0, 1, -2),
@@ -1747,10 +1377,9 @@ do -- menu
             Parent = new_slider,
         });
 
-        UI:AttachTheme(Inline, { BackgroundColor3 = "outline" })
-
         local Accent = Instance_manager.new("TextButton", {
             Name = "Slider_Accent",
+            BackgroundColor3 = UI.themes.accent,
             BorderColor3 = color3_rgb(0, 0, 0),
             BorderSizePixel = 0,
             Size = udim2(0, 0, 1, 0),
@@ -1762,16 +1391,13 @@ do -- menu
             Parent = Inline,
         });
 
-        UI:AttachTheme(Accent, { BackgroundColor3 = "accent" })
-
         local SliderCircle = Instance_manager.new("Frame", {
             Name = "Slider_Circle",
+            BackgroundColor3 = UI.themes.accent,
             Size = udim2(0, 12, 0, 12),
             AnchorPoint = vec2(0.5, 0.5),
             Parent = Inline,
         });
-
-        UI:AttachTheme(SliderCircle, { BackgroundColor3 = "accent" })
 
         Instance_manager.new("UICorner", {
             Parent = SliderCircle,
@@ -1892,13 +1518,12 @@ do -- menu
 
         local outline = Instance_manager.new("Frame", {
             Name = "button_outline",
+            BackgroundColor3 = UI.themes.outline,
             Position = udim2(0, 0, 1, -16),
             Size = udim2(1, 0, 0, 22),
             BorderSizePixel = 0,
             Parent = new_button,
         });
-
-        UI:AttachTheme(outline, { BackgroundColor3 = "outline" })
 
         Instance_manager.new("UICorner", {
             Parent = outline,
@@ -1908,6 +1533,7 @@ do -- menu
         local inline = Instance_manager.new("TextButton", {
             Name = "button_inline",
             Text = "",
+            BackgroundColor3 = UI.themes.background,
             Position = udim2(0, 1, 0, 1),
             Size = udim2(1, -2, 1, -2),
             FontFace = UI.font,
@@ -1916,8 +1542,6 @@ do -- menu
             AutoButtonColor = false,
             Parent = outline,
         });
-
-        UI:AttachTheme(inline, { BackgroundColor3 = "background" })
 
         Instance_manager.new("UICorner", {
             Parent = inline,
@@ -1934,23 +1558,33 @@ do -- menu
             Size = udim2(1, 0, 1, 0),
             Parent = inline,
         });
-        
+
         new_button.MouseEnter:Connect(function()
-            tween_service:Create(outline, TweenInfo.new(0.33, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                BackgroundColor3 = UI:AttachTheme(outline, { BackgroundColor3 = "accent" }),
-            }):Play()
+            tween_service:Create(outline, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = UI.themes.accent}):Play()
         end)
-        
+
         new_button.MouseLeave:Connect(function()
-            tween_service:Create(outline, TweenInfo.new(0.33, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                BackgroundColor3 = UI:AttachTheme(outline, { BackgroundColor3 = "outline" }),
-            }):Play()
+            tween_service:Create(outline, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = UI.themes.outline}):Play()
         end)
-        
+
+        local confirm = false
         signals.connection(inline.MouseButton1Down, function()
-            button.callback()
-            text.Text = string.upper(button.name)
-        end)        
+            if (not confirm) then
+                confirm = true
+                text.Text = "ARE YOU SURE?"
+
+                delay(2, function()
+                    if confirm then
+                        confirm = false
+                        text.Text = string.upper(button.name);
+                    end
+                end)
+            else
+                confirm = false
+                button.callback()
+                text.Text = string.upper(button.name);
+            end
+        end);
 
         return button;
     end;
@@ -1985,14 +1619,13 @@ do -- menu
 
         local Outline = Instance_manager.new("Frame", {
             Name = "List_Outline",
+            BackgroundColor3 = UI.themes.outline,
             BorderSizePixel = 0,
             BorderColor3 = color3_rgb(0, 0, 0),
             Position = udim2(0.5, 0, 0, -5),
             Size = udim2(0.5, 0, 0, 18),
             Parent = NewList
         });
-
-        UI:AttachTheme(Outline, { BackgroundColor3 = "outline" })
 
         Instance_manager.new("UICorner", {
             Parent = Outline,
@@ -2001,6 +1634,7 @@ do -- menu
 
         local Inline = Instance_manager.new("TextButton", {
             Name = "List_Inline",
+            BackgroundColor3 = UI.themes.background,
             BorderColor3 = color3_rgb(0, 0, 0),
             BorderSizePixel = 0,
             Position = udim2(0, 1, 0, 1),
@@ -2012,8 +1646,6 @@ do -- menu
             AutoButtonColor = false,
             Parent = Outline
         });
-
-        UI:AttachTheme(Inline, { BackgroundColor3 = "background" })
 
         Instance_manager.new("UICorner", {
             Parent = Inline,
@@ -2054,14 +1686,13 @@ do -- menu
         local ContentOutline = Instance_manager.new("Frame", {
             Name = "List_ContentOutline",
             AutomaticSize = Enum.AutomaticSize.Y,
+            BackgroundColor3 = UI.themes.outline,
             BorderSizePixel = 0,
             Position = udim2(0, 1, 1, 2),
             Size = udim2(1, -2, 0, 0),
             Visible = false,
             Parent = Outline
         });
-
-        UI:AttachTheme(ContentOutline, { BackgroundColor3 = "outline" })
 
         Instance_manager.new("UICorner", {
             Parent = ContentOutline,
@@ -2070,14 +1701,13 @@ do -- menu
 
         local ContentInline = Instance_manager.new("Frame", {
             Name = "List_ContentInline",
+            BackgroundColor3 = UI.themes.background,
             BorderColor3 = color3_rgb(0, 0, 0),
             BorderSizePixel = 0,
             Position = udim2(0, 2, 0, 1),
             Size = udim2(1, -3, 1, 0),
             Parent = ContentOutline
         });
-
-        UI:AttachTheme(ContentInline, { BackgroundColor3 = "background" })
 
         Instance_manager.new("UICorner", {
             Parent = ContentInline,
@@ -2101,6 +1731,7 @@ do -- menu
         local description = Instance_manager.new("TextLabel", {
             Name = "description",
             FontFace = UI.font,
+            TextColor3 = UI.themes.inactive,
             TextSize = UI.font_size,
             TextStrokeTransparency = 0,
             TextXAlignment = Enum.TextXAlignment.Left,
@@ -2115,8 +1746,6 @@ do -- menu
             Text = Dropdown.description ~= nil and Dropdown.description or "",
             ZIndex = -1
         });
-
-        UI:AttachTheme(description, { TextColor3 = "inactive" })
 
         local title = Instance_manager.new("TextLabel", {
             Name = "title",
@@ -2161,16 +1790,16 @@ do -- menu
                 if Dropdown.Max then
                     if table.find(chosen, option) then
                         table.remove(chosen, table.find(chosen, option))
-                        UI:AttachTheme(text, { TextColor3 = "inactive" })
+                        text.TextColor3 = UI.themes.inactive
                         AccentLine.BackgroundTransparency = 1
                     else
                         if #chosen == Dropdown.Max then
                             local firstChosen = table.remove(chosen, 1)
-                            UI:AttachTheme(Dropdown.OptionInsts[firstChosen].text, { TextColor3 = "inactive" })
+                            Dropdown.OptionInsts[firstChosen].text.TextColor3 = UI.themes.inactive
                             Dropdown.OptionInsts[firstChosen].accent.BackgroundTransparency = 1
                         end
                         table.insert(chosen, option)
-                        UI:AttachTheme(text, { TextColor3 = "accent" })
+                        text.TextColor3 = UI.themes.accent
                         AccentLine.BackgroundTransparency = 0
                     end
 
@@ -2186,17 +1815,17 @@ do -- menu
                         previousAccentLine.BackgroundTransparency = 1
                     end
                     if previousText then
-                        UI:AttachTheme(previousText, { TextColor3 = "inactive" })
+                        previousText.TextColor3 = UI.themes.inactive
                     end
 
                     for opt, tbl in next, Dropdown.OptionInsts do
-                        UI:AttachTheme(tbl.text, { TextColor3 = "inactive" }) 
+                        tbl.text.TextColor3 = UI.themes.inactive
                         tbl.accent.BackgroundTransparency = 1
-                    end                    
+                    end
 
                     chosen = option
                     Value.Text = option
-                    UI:AttachTheme(text, { TextColor3 = "accent" })
+                    text.TextColor3 = UI.themes.accent
                     AccentLine.BackgroundTransparency = 0
                     previousAccentLine = AccentLine
                     previousText = text
@@ -2229,11 +1858,11 @@ do -- menu
                 });
                 local AccentLine = Instance_manager.new("Frame", {
                     Name = "AccentLine",
+                    BackgroundColor3 = UI.themes.accent,
                     Size = udim2(0, 1, 1, 0),
                     BackgroundTransparency = 1,
                     Parent = NewOption
                 });
-                UI:AttachTheme(AccentLine, { BackgroundColor3 = "accent" })
                 local OptionLabel = Instance_manager.new("TextLabel", {
                     Name = "OptionLabel",
                     FontFace = UI.font,
@@ -2264,7 +1893,7 @@ do -- menu
 
                 for opt, tbl in next, Dropdown.OptionInsts do
                     if not table.find(option, opt) then
-                        UI:AttachTheme(tbl.text, { TextColor3 = "inactive" })
+                        tbl.text.TextColor3 = UI.themes.inactive
                         tbl.accent.BackgroundTransparency = 1
                     end
                 end
@@ -2272,7 +1901,7 @@ do -- menu
                 for _, opt in next, option do
                     if table.find(Dropdown.Options, opt) and #chosen < Dropdown.Max then
                         table.insert(chosen, opt)
-                        UI:AttachTheme(Dropdown.OptionInsts[opt].text, { TextColor3 = "accent" })
+                        Dropdown.OptionInsts[opt].text.TextColor3 = UI.themes.accent
                         Dropdown.OptionInsts[opt].accent.BackgroundTransparency = 0
                     end
                 end
@@ -2297,13 +1926,13 @@ do -- menu
             else
                 for opt, tbl in next, Dropdown.OptionInsts do
                     if opt ~= option then
-                        UI:AttachTheme(tbl.text, { TextColor3 = "inactive" })
+                        tbl.text.TextColor3 = UI.themes.inactive
                         tbl.accent.BackgroundTransparency = 1
                     end
                 end
                 if table.find(Dropdown.Options, option) then
                     chosen = option
-                    UI:AttachTheme(Dropdown.OptionInsts[option].text, { TextColor3 = "accent" })
+                    Dropdown.OptionInsts[option].text.TextColor3 = UI.themes.accent
                     Dropdown.OptionInsts[option].accent.BackgroundTransparency = 0
                     Value.Text = option
                     UI.flags[Dropdown.Flag] = chosen
@@ -2378,14 +2007,13 @@ do -- menu
 
         local Outline = Instance_manager.new("Frame", {
             Name = "textbox_outline",
+            BackgroundColor3 = UI.themes.outline,
             BorderColor3 = color3_rgb(0, 0, 0),
             BorderSizePixel = 0,
             Position = udim2(0, 0, 1, -16),
             Size = udim2(1, 0, 0, 20),
             Parent = NewBox
         });
-
-        UI:AttachTheme(Outline, { BackgroundColor3 = "outline" })
 
         Instance_manager.new("UICorner", {
             Parent = Outline,
@@ -2394,14 +2022,13 @@ do -- menu
 
         local Inline = Instance_manager.new("Frame", {
             Name = "textbox_inline",
+            BackgroundColor3 = UI.themes.background,
             BorderColor3 = color3_rgb(0, 0, 0),
             BorderSizePixel = 0,
             Position = udim2(0, 1, 0, 1),
             Size = udim2(1, -2, 1, -2),
             Parent = Outline
         });
-
-        UI:AttachTheme(Inline, { BackgroundColor3 = "background" })
 
         Instance_manager.new("UICorner", {
             Parent = Inline,
@@ -2414,6 +2041,7 @@ do -- menu
             Text = textbox.State,
             PlaceholderText = textbox.Placeholder,
             TextColor3 = color3_rgb(255, 255, 255),
+            PlaceholderColor3 = UI.themes.inactive,
             TextSize = UI.font_size,
             TextStrokeTransparency = 0,
             TextXAlignment = Enum.TextXAlignment.Left,
@@ -2426,8 +2054,6 @@ do -- menu
             Parent = Inline,
             ClearTextOnFocus = false
         });
-
-        UI:AttachTheme(Value, { PlaceholderColor3 = "inactive" })
 
         local Title = Instance_manager.new("TextLabel", {
             Name = "title",
@@ -2484,6 +2110,7 @@ do -- menu
             TextColor3 = color3_rgb(0, 0, 0),
             TextSize = UI.font_size,
             AutoButtonColor = false,
+            BackgroundColor3 = UI.themes.outline,
             BackgroundTransparency = 0,
             BorderColor3 = color3_rgb(0, 0, 0),
             BorderSizePixel = 0,
@@ -2491,29 +2118,22 @@ do -- menu
             Parent = Dropdown.Section.elements.section_content
         });
 
-        UI:AttachTheme(NewList, { BackgroundColor3 = "outline" })
-
         NewList.MouseEnter:Connect(function()
-            tween_service:Create(NewList, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
-                BackgroundColor3 = UI:AttachTheme(NewList, { BackgroundColor3 = "accent" })
-            }):Play()
-        end)
-        
+            tween_service:Create(NewList, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {BackgroundColor3 = UI.themes.accent}):Play();
+        end);
+
         NewList.MouseLeave:Connect(function()
-            tween_service:Create(NewList, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
-                BackgroundColor3 = UI:AttachTheme(NewList, { BackgroundColor3 = "outline" })
-            }):Play()
-        end)        
+            tween_service:Create(NewList, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {BackgroundColor3 = UI.themes.outline}):Play();
+        end);
 
         local ContentOutline = Instance_manager.new("Frame", {
             Name = "ContentOutline",
             AutomaticSize = Enum.AutomaticSize.Y,
+            BackgroundColor3 = UI.themes.outline,
             BorderColor3 = color3_rgb(0, 0, 0),
             Size = udim2(1, 0, 1, 0),
             Parent = NewList
         });
-
-        UI:AttachTheme(ContentOutline, { BackgroundColor3 = "outline" })
 
         Instance_manager.new("UICorner", {
             Parent = ContentOutline,
@@ -2526,17 +2146,16 @@ do -- menu
             BottomImage = "rbxassetid://7783554086",
             CanvasSize = udim2(),
             MidImage = "rbxassetid://7783554086",
-            ScrollBarThickness = 2,
+            ScrollBarImageColor3 = UI.themes.accent,
+            ScrollBarThickness = 4,
             Active = true,
+            BackgroundColor3 = UI.themes.background,
             BorderColor3 = color3_rgb(0, 0, 0),
             BorderSizePixel = 0,
             Position = udim2(0, 1, 0, 1),
             Size = udim2(1, -2, 1, -2),
             Parent = ContentOutline
         });
-
-        UI:AttachTheme(ContentInline, { ScrollBarImageColor3 = "accent" })
-        UI:AttachTheme(ContentInline, { BackgroundColor3 = "background" })
 
         Instance_manager.new("UICorner", {
             Parent = ContentInline,
@@ -2560,14 +2179,9 @@ do -- menu
         local function handleOptionClick(option, button, label)
             button.MouseButton1Down:Connect(function()
                 for _, opt in pairs(Dropdown.OptionInsts) do
-                    tween_service:Create(opt.label, TweenInfo.new(0.33), { 
-                        TextColor3 = UI:AttachTheme(opt.label, { TextColor3 = "inactive" })
-                    }):Play()
+                    tween_service:Create(opt.label, TweenInfo.new(0.33), { TextColor3 = UI.themes.inactive }):Play()
                 end
-                
-                tween_service:Create(label, TweenInfo.new(0.33), { 
-                    TextColor3 = UI:AttachTheme(label, { TextColor3 = "accent" })
-                }):Play()                
+                tween_service:Create(label, TweenInfo.new(0.33), { TextColor3 = UI.themes.accent }):Play()
                 UI.flags[Dropdown.Flag] = option
                 Dropdown.Callback(option)
             end);
@@ -2582,10 +2196,9 @@ do -- menu
                 Parent = ContentInline
             });
 
-            UI:AttachTheme(ContentInline, { ScrollBarImageColor3 = "accent" })
-
             local label = Instance_manager.new("TextLabel", {
                 Text = option,
+                TextColor3 = UI.themes.inactive,
                 BackgroundTransparency = 1,
                 Size = udim2(1, 0, 1, 0),
                 FontFace = UI.font,
@@ -2594,8 +2207,6 @@ do -- menu
                 Position = udim2(0, 5, 0, 0),
                 Parent = button
             });
-
-            UI:AttachTheme(label, { TextColor3 = "inactive" })
 
             Dropdown.OptionInsts[option] = { label = label };
             handleOptionClick(option, button, label);
@@ -2618,10 +2229,9 @@ do -- menu
                     Parent = ContentInline
                 });
 
-                UI:AttachTheme(ContentInline, { ScrollBarImageColor3 = "accent" })
-
                 local label = Instance_manager.new("TextLabel", {
                     Text = option,
+                    TextColor3 = UI.themes.inactive,
                     BackgroundTransparency = 1,
                     Size = udim2(1, 0, 1, 0),
                     FontFace = UI.font,
@@ -2630,8 +2240,6 @@ do -- menu
                     Position = udim2(0, 5, 0, 0),
                     Parent = button
                 });
-
-                UI:AttachTheme(label, { TextColor3 = "inactive" })
 
                 Dropdown.OptionInsts[option] = { label = label }
                 handleOptionClick(option, button, label)
@@ -2697,6 +2305,7 @@ do -- menu
 
             Description.Name = "Description"
             Description.FontFace = UI.font
+            Description.TextColor3 = UI.themes.inactive
             Description.TextSize = UI.font_size
             Description.TextStrokeTransparency = 0
             Description.TextXAlignment = Enum.TextXAlignment.Left
@@ -2708,8 +2317,6 @@ do -- menu
             Description.Position = udim2(0, 0, 0, 15)
             Description.Parent = NewColor
             Description.Text = Colorpicker.Description
-
-            UI:AttachTheme(Description, { TextColor3 = "inactive" })
         end;
         --
         Colorpicker.Colorpickers = Colorpicker.Colorpickers + 1
@@ -2771,13 +2378,10 @@ do -- menu
             Binding = nil,
         };
         local State, Key = false
-        local ListValue
+        --[[local ListValue;
         if not Keybind.Ignore then
-            local safeKey = (Keybind.State == nil) and "None" or Keybind.state
-            local safeName = (Keybind.Name == nil) and "None" or Keybind.Name 
-        
-            ListValue = UI.keybind_list:NewKey(safeKey, safeName);
-        end        
+            ListValue = library.keybind_list:NewKey(Keybind.State, Keybind.Name)
+        end]]
         --
         local NewBind = Instance_manager.new("Frame", {
             Name = "NewBind",
@@ -2802,6 +2406,7 @@ do -- menu
         local description = Instance_manager.new("TextLabel", {
             Name = "description",
             FontFace = UI.font,
+            TextColor3 = UI.themes.inactive,
             TextSize = UI.font_size,
             TextStrokeTransparency = 0,
             TextXAlignment = Enum.TextXAlignment.Left,
@@ -2812,17 +2417,14 @@ do -- menu
             Text = Keybind.description
         });
 
-        UI:AttachTheme(description, { TextColor3 = "inactive" })
-
         local Outline = Instance_manager.new("Frame", {
             Name = "Keybind_Outline",
             AnchorPoint = vec2(1, 0.5),
+            BackgroundColor3 = UI.themes.outline,
             Position = udim2(1, -1, 0.85, 0),
             Size = udim2(0, 65, 1.75, 0),
             Parent = NewBind
         });
-
-        UI:AttachTheme(Outline, { BackgroundColor3 = "outline" })
 
         Instance_manager.new("UICorner", {
             Parent = Outline,
@@ -2831,6 +2433,7 @@ do -- menu
 
         local Inline = Instance_manager.new("TextButton", {
             Name = "Keybind_Inline",
+            BackgroundColor3 = UI.themes.background,
             Position = udim2(0, 1, 0, 1),
             Size = udim2(1, -2, 1, -2),
             FontFace = UI.font,
@@ -2840,8 +2443,6 @@ do -- menu
             AutoButtonColor = false,
             Parent = Outline
         });
-
-        UI:AttachTheme(Inline, { BackgroundColor3 = "background" })
 
         Instance_manager.new("UICorner", {
             Parent = Inline,
@@ -2862,13 +2463,12 @@ do -- menu
             Name = "Bind_Icon",
             Image = "http://www.roblox.com/asset/?id=16081386298",
             BackgroundTransparency = 1,
+            ImageColor3 = UI.themes.inactive,
             AnchorPoint = vec2(0, 0.5),
             Position = udim2(0, 1, 0.5, 0),
             Size = udim2(0, 20, 0, 20),
             Parent = Container
         });
-
-        UI:AttachTheme(Icon, { ImageColor3 = "inactive" })
 
         local Value = Instance_manager.new("TextLabel", {
             Name = "Value",
@@ -2888,16 +2488,12 @@ do -- menu
         Inline.Size = udim2(1, -2, 1, -2);
 
         Inline.MouseEnter:Connect(function()
-            tween_service:Create(Inline, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                BackgroundColor3 = UI:AttachTheme(Inline, { BackgroundColor3 = "accent" })
-            }):Play()
+            tween_service:Create(Inline, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = UI.themes.accent}):Play()
         end)
-        
+
         Inline.MouseLeave:Connect(function()
-            tween_service:Create(Inline, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                BackgroundColor3 = UI:AttachTheme(Inline, { BackgroundColor3 = "background" })
-            }):Play()
-        end)        
+            tween_service:Create(Inline, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = UI.themes.background}):Play()
+        end)
 
         Inline.MouseEnter:Connect(function()
             tween_service:Create(Value, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = color3_rgb(200, 200, 200)}):Play()
@@ -2911,15 +2507,14 @@ do -- menu
             Name = "ModeBox",
             Parent = Outline,
             AnchorPoint = vec2(0,0.5),
+            BackgroundColor3 = UI.themes.background,
+            BorderColor3 = UI.themes.outline,
             BorderSizePixel = 1,
             Size = udim2(0, 65, 0, 60),
             Position = udim2(0,-70,3,0),
             Visible = false,
             ZIndex = 99999
         });
-
-        UI:AttachTheme(ModeBox, { BackgroundColor3 = "background" })
-        UI:AttachTheme(ModeBox, { BorderColor3 = "outline" })
 
         local Hold = Instance_manager.new("TextButton", {
             Name = "Hold",
@@ -2987,12 +2582,9 @@ do -- menu
                     end
                     local text = "None"
                     Value.Text = text
-                    if not Keybind.Ignore then
-                        local new_text = (text == nil) and "None" or text  
-                        local new_name = (Keybind.Name == nil) and "None" or Keybind.Name  
-                    
-                        ListValue:Update(new_text, new_name)
-                    end                    
+                    --[[if not Keybind.Ignore then
+                        ListValue:Update(text, Keybind.Name)
+                    end]]
                     --Outline.Size = udim2(0, Value.TextBounds.X + 10, 1.9, 0)
                 elseif newkey ~= nil then
                     Key = newkey
@@ -3005,12 +2597,9 @@ do -- menu
                     local text = (UI.keys[newkey] or tostring(newkey):gsub("Enum.KeyCode.", ""))
 
                     Value.Text = text
-                    if not Keybind.Ignore then
-                        local new_text = (text == nil) and "None" or text  
-                        local new_name = (Keybind.Name == nil) and "None" or Keybind.Name  
-                    
-                        ListValue:Update(new_text, new_name)
-                    end   
+                    --[[if not Keybind.Ignore then
+                        ListValue:Update(text, Keybind.Name)
+                    end]]
                     --Outline.Size = udim2(0, Value.TextBounds.X + 10, 1.9, 0)
                 end
                 UI.flags[Keybind.Flag .. "_KEY"] = newkey
@@ -3018,19 +2607,16 @@ do -- menu
                 if not Keybind.UseKey then
                     UI.flags[Keybind.Flag .. "_KEY STATE"] = newkey
                     Keybind.Mode = newkey
-                    if not Keybind.Ignore then
-                        local safeKey = (UI.keys[Key] == nil) and "None" or (tostring(Key):gsub("Enum.KeyCode.", "") or "None")
-                        local safeName = (Keybind.Name == nil) and "None" or Keybind.Name 
-                    
-                        ListValue:Update(safeKey, safeName) 
-                    end                    
+                    --[[if not Keybind.Ignore then
+                        ListValue:Update((UI.keys[Key] or tostring(Key):gsub("Enum.KeyCode.", "")), Keybind.Name)
+                    end]]
                     if Keybind.Mode == "Always" then
                         State = true
                         if Keybind.Flag then
                             UI.flags[Keybind.Flag] = State
                         end
                         Keybind.Callback(true)
-                        ListValue:SetVisible(true)
+                        --ListValue:SetVisible(true)
                     end
                 end
             else
@@ -3068,18 +2654,18 @@ do -- menu
                             Keybind.Callback(true)
                         end
                     end)
-                    if not Keybind.Ignore then
+                    --[[if not Keybind.Ignore then
                         ListValue:SetVisible(true)
-                    end
+                    end]]
                 elseif Keybind.Mode == "Toggle" then
                     State = not State
                     if Keybind.Flag then
                         UI.flags[Keybind.Flag] = State
                     end
                     Keybind.Callback(State)
-                    if not Keybind.Ignore then
+                    --[[if not Keybind.Ignore then
                         ListValue:SetVisible(State)
-                    end
+                    end]]
                 end
             end
         end)
@@ -3096,9 +2682,9 @@ do -- menu
                             if Keybind.Callback then
                                 Keybind.Callback(false)
                             end
-                            if not Keybind.Ignore then
+                            --[[if not Keybind.Ignore then
                                 ListValue:SetVisible(false)
-                            end
+                            end]]
                         end
                     end
                 end
@@ -3172,137 +2758,5 @@ do -- open/close
         end;
     end);
 end;
---
-local watermark = UI:watermark({ name = 'Celestial' });
-
-function UI:Configs(tab)
-    tab:textbox({ flag = "cfg_name", name = "config name" });
-    local ConfigList = tab:listbox({ flag = "cfg_list", options = {}, scrollingmax = 5 });
-    --
-    local CurrentList = {};
-    local function cfg_list()
-        local List = {}
-        for _, file in ipairs(listfiles("CONFIGS")) do
-            List[#List + 1] = file:match("CONFIGS\\(.*)%.cfg");
-        end;
-        if #List ~= #CurrentList or table.concat(List) ~= table.concat(CurrentList) then
-            CurrentList = List;
-            ConfigList:Refresh(CurrentList);
-        end;
-    end;
-    --
-    tab:button({ Name = "create", Callback = function()
-        pcall(function()
-            local config_name = UI.flags["cfg_name"];
-            if config_name ~= "" and not isfile("CONFIGS/" .. config_name .. ".cfg") then
-                writefile("CONFIGS/" .. config_name .. ".cfg", UI:GetConfig());
-                    UI:Notification("created config [".. config_name .."].", 5, color3_new(0, 1, 0))
-                cfg_list()
-            end;
-        end);
-    end});
-    --
-    tab:button({ Name = "save", Callback = function()
-        pcall(function()
-            local selected_config = UI.flags["cfg_list"];
-            if selected_config then
-                writefile("CONFIGS/" .. selected_config .. ".cfg", UI:GetConfig());
-                    UI:Notification("saved config [".. selected_config .."].", 5, color3_new(0, 1, 0))
-                cfg_list()
-            end;
-        end);
-    end});
-    --
-    tab:button({ Name = "load", Callback = function()
-        pcall(function()
-            local selected_config = UI.flags["cfg_list"];
-            if selected_config then
-                UI:LoadConfig(readfile("CONFIGS/" .. selected_config .. ".cfg"));
-                    UI:Notification("loaded config [".. selected_config .."].", 5, color3_new(0, 1, 0))
-                cfg_list()
-            end;
-        end);
-    end});
-    --
-    tab:button({ Name = "delete", Callback = function()
-        pcall(function()
-            local selected_config = UI.flags["cfg_list"];
-            if selected_config then
-                delfile("CONFIGS/" .. selected_config .. ".cfg");
-                    UI:Notification("deleted config [".. selected_config .."].", 5, color3_new(1, 0, 0))
-                cfg_list()
-            end;
-        end);
-    end});
-    cfg_list();
-end;
-
-function UI:Themes(tab)
-    tab:dropdown({name = "Themes", description = "Custom themes for Menu", options = {"Default", "blue baby", "quantum", "off white", "the hub", "fatality", "gamesense"}, default = "Default", flag = "theme_list", callback = function(state)
-        UI:LoadTheme(state);
-    end});
-end;
-
-function UI:Extra(tab)
-    tab:slider({name = "FPS cap", min = 60, max = 480, default = 240, decimals = 0.1, suffix = "FPS", callback = function(state) setfpscap(state) end});
-    tab:button({name = "Test notification", callback = function()
-        UI:Notification("Test Notification", 3, Color3.fromRGB(math.random(0, 255), math.random(0, 255), math.random(0, 255)));
-    end});
-    tab:button({name = "exit", callback = function()
-        game:Shutdown();
-    end});
-    --
-    tab:button({name = "rejoin", callback = function()
-        pcall(function() game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer); end);
-    end});
-end;
-
-function UI:Menu(tab)
-    tab:keybind({name = "Menu Keybind", description = "Open/Hide Menu", default = UI.ui_key, usekey = true, ignore = true, callback = function(state) UI.ui_key = state end});
-    tab:toggle({name = "Watermark", description = "Shows watermark", default = true, flag = "show watermark", callback = function(state) watermark:SetVisible(state); end});
-    tab:toggle({name = "Keybinds", description = "Shows keybinds", default = true, flag = "show keybinds", callback = function(state) UI.keybind_list:SetVisible(state) end});
-    tab:slider({name = "Horizontal", min = 0, max = 100, default = 50, decimals = 1, suffix = "px", flag = "watermark_x", callback = function(state) watermark:Position(state / 100, nil) end});
-    tab:slider({name = "Vertical", min = 0, max = 100, default = 5, decimals = 1, suffix = "px", flag = "watermark_y", callback = function(state) watermark:Position(nil, state / 100) end});
-    tab:dropdown({name = "Menu Font", description = "Custom fonts for Menu", options = {"Proggy", "Templeos", "Pixel", "Rubik",}, default = "Rubik", flag = "Menu Fonts", callback = function(state)
-        local fonts = {
-            ["Proggy"] = {fonts.proggytiny, 9},
-            ["Templeos"] = {fonts.templeos, 6},
-            ["Pixel"] = {fonts.smallest_pixel, 9},
-            Rubik = {Font.new([[rbxassetid://12187365977]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal), 12},
-        };
-        for _, v in ipairs({UI.menu_gui, UI.watermark_gui, UI.keybind_screen_gui}) do
-            for _, obj in ipairs(v:GetDescendants()) do
-                if obj:IsA("TextLabel") or obj:IsA("TextButton") or obj:IsA("TextBox") then
-                    obj.FontFace, obj.TextSize = table.unpack(fonts[state]);
-                end;
-            end;
-        end;
-    end});
-end;
---
-local loops = {
-    watermark = { e = 0, time = 1.33; },
-};
-framework.modules.signals.connection(run_service["RenderStepped"], function(dt)
-    local time = tick();
-
-    do -- watermark
-        if (flags["show watermark"] and (time - loops.watermark.e >= loops.watermark.time)) then
-            loops.watermark.e = time;
-            local selected_theme, accent_color = UI:GetSelectedThemeAndAccent();
-            local accent = string.format("#%02X%02X%02X", accent_color.R * 255, accent_color.G * 255, accent_color.B * 255);
-            local avg_fps = fps:GetValue();
-            local avg_ping = math.floor(ping:GetValue());
-            local display_game = "V2";
-            local user_type = (LPH_OBFUSCATED and "Public") or "Developer";  -- Set the user type here
-    
-            watermark:update_text(string.format(
-                'Celestial | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">%s</font>', 
-                accent, avg_ping, accent, avg_fps, accent, display_game, accent, user_type
-            ));
-        end;
-    end;
-
-end);
 
 return {UI, framework, fonts, black_bg, blur_effect};
