@@ -65,13 +65,13 @@ local fonts = {
         name = "smallest pixel",
         weight = "regular",
         style = "normal",
-        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/smallest_pixel-7.ttf",
+        link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/smallest_pixel-7.ttf",
     }),
     templeos = create_font:register("Celestial/MENU/FONTS", {
         name = "templeos",
         weight = "regular",
         style = "normal",
-        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/Templeos.ttf",
+        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/smallest_pixel-7.ttf",
     }),
     proggytiny = create_font:register("Celestial/MENU/FONTS", {
         name = "proggytiny",
@@ -83,7 +83,7 @@ local fonts = {
         name = "medodica",
         weight = "regular",
         style = "normal",
-        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/MedodicaRegular.ttf",
+        link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/MedodicaRegular.ttf",
     }),
 };
 --
@@ -3263,10 +3263,10 @@ function UI:Menu(tab)
     tab:toggle({name = "Keybinds", description = "Shows keybinds", default = true, flag = "show keybinds", callback = function(state) UI.keybind_list:SetVisible(state) end});
     tab:slider({name = "Horizontal", min = 0, max = 100, default = 50, decimals = 1, suffix = "px", flag = "watermark_x", callback = function(state) watermark:Position(state / 100, nil) end});
     tab:slider({name = "Vertical", min = 0, max = 100, default = 5, decimals = 1, suffix = "px", flag = "watermark_y", callback = function(state) watermark:Position(nil, state / 100) end});
-    tab:dropdown({name = "Menu Font", description = "Custom fonts for Menu", options = {"Proggy", "Templeos", "Pixel"}, default = "Rubik", flag = "Menu Fonts", callback = function(state)
+    tab:dropdown({name = "Menu Font", description = "Custom fonts for Menu", options = {"Proggy", "Templeos", "Pixel", "Rubik"}, default = "Rubik", flag = "Menu Fonts", callback = function(state)
         local fonts = {
-            ["Proggy"] = {fonts.proggytiny, 9},
-            ["Templeos"] = {fonts.templeos, 6},
+            ["Proggy"] = {fonts.proggytiny, 15},
+            ["Templeos"] = {fonts.templeos, 15},
             ["Pixel"] = {fonts.smallest_pixel, 9},
             Rubik = {Font.new([[rbxassetid://12187365977]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal), 12},
         };
