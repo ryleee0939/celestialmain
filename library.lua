@@ -100,8 +100,8 @@ local UI = ({
         Default = {
             accent = color3_rgb(189, 172, 255),
             risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(17, 17, 17),
-            outline = color3_rgb(27, 27, 27),
+            background = color3_rgb(18, 18, 18),
+            outline = color3_rgb(43, 43, 43),
             active = color3_rgb(255, 255, 255),
             inactive = color3_rgb(120, 120, 120)
         },
