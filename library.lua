@@ -85,6 +85,24 @@ local fonts = {
         style = "normal",
         link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/MedodicaRegular.ttf",
     }),
+    Minecraftia = create_font:register("Celestial/MENU/FONTS", {
+        name = "Minecraftia",
+        weight = "regular",
+        style = "normal",
+        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/Minecraftia-Regular.ttf",
+    }),
+    Verdana = create_font:register("Celestial/MENU/FONTS", {
+        name = "Verdana",
+        weight = "regular",
+        style = "normal",
+        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/Verdana-Font.ttf",
+    }),
+    tahoma = create_font:register("Celestial/MENU/FONTS", {
+        name = "tahoma",
+        weight = "regular",
+        style = "normal",
+        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/tahoma_bold.ttf",
+    }),
 };
 --
 local UI = ({
@@ -100,8 +118,8 @@ local UI = ({
         Default = {
             accent = color3_rgb(189, 172, 255),
             risky = color3_rgb(200, 0, 0),
-            background = color3_rgb(18, 18, 18),
-            outline = color3_rgb(4, 4, 4),
+            background = color3_rgb(17, 17, 17),
+            outline = color3_rgb(27, 27, 27),
             active = color3_rgb(255, 255, 255),
             inactive = color3_rgb(120, 120, 120)
         },
@@ -3263,7 +3281,7 @@ function UI:Menu(tab)
     tab:toggle({name = "Keybinds", description = "Shows keybinds", default = true, flag = "show keybinds", callback = function(state) UI.keybind_list:SetVisible(state) end});
     tab:slider({name = "Horizontal", min = 0, max = 100, default = 50, decimals = 1, suffix = "px", flag = "watermark_x", callback = function(state) watermark:Position(state / 100, nil) end});
     tab:slider({name = "Vertical", min = 0, max = 100, default = 5, decimals = 1, suffix = "px", flag = "watermark_y", callback = function(state) watermark:Position(nil, state / 100) end});
-    tab:dropdown({name = "Menu Font", description = "Custom fonts for Menu", options = {"Proggy", "Templeos", "Pixel", "Rubik",}, default = "Rubik", flag = "Menu Fonts", callback = function(state)
+    tab:dropdown({name = "Menu Font", description = "Custom fonts for Menu", options = {"Proggy", "Templeos", "Pixel", "tahoma", "Verdana", "Minecraftia"}, default = "Rubik", flag = "Menu Fonts", callback = function(state)
         local fonts = {
             ["Proggy"] = {fonts.proggytiny, 9},
             ["Templeos"] = {fonts.templeos, 6},
