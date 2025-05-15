@@ -61,56 +61,31 @@ signals = framework.modules.signals
 -- fonts
 local create_font = loadstring(game:HttpGet("https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/fonts.lua"))();
 local fonts = {
-    smallest_pixel = create_font:register({
-        folder = "Celestial/MENU/FONTS",
+    smallest_pixel = create_font:register("Celestial/MENU/FONTS", {
         name = "smallest pixel",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/smallest_pixel-7.ttf",
     }),
-    templeos = create_font:register({
-        folder = "Celestial/MENU/FONTS",
+    templeos = create_font:register("Celestial/MENU/FONTS", {
         name = "templeos",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/Templeos.ttf",
     }),
-    proggytiny = create_font:register({
-        folder = "Celestial/MENU/FONTS",
+    proggytiny = create_font:register("Celestial/MENU/FONTS", {
         name = "proggytiny",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/ProggyTiny.ttf",
     }),
-    medodica = create_font:register({
-        folder = "Celestial/MENU/FONTS",
+    medodica = create_font:register("Celestial/MENU/FONTS", {
         name = "medodica",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/MedodicaRegular.ttf",
     }),
-    Minecraftia = create_font:register({
-        folder = "Celestial/MENU/FONTS",
-        name = "Minecraftia",
-        weight = "regular",
-        style = "normal",
-        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/Minecraftia-Regular.ttf",
-    }),
-    Verdana = create_font:register({
-        folder = "Celestial/MENU/FONTS",
-        name = "Verdana",
-        weight = "regular",
-        style = "normal",
-        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/Verdana-Font.ttf",
-    }),
-    tahoma = create_font:register({
-        folder = "Celestial/MENU/FONTS",
-        name = "tahoma",
-        weight = "regular",
-        style = "normal",
-        link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/tahoma_bold.ttf",
-    }),
-}
+};
 --
 local UI = ({
     autoload = true,
