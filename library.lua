@@ -1,4 +1,4 @@
-local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/ryleee0939/Vanta.devmain/refs/heads/main/framework.lua", true))();
+local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/framework.lua", true))();
 --
 do -- checks
     do -- folders
