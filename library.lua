@@ -34,6 +34,7 @@ if (not LPH_OBFUSCATED) then
     function LPH_CRASH() return print(debug.traceback()) end;
 end;
 --
+--
 -- math
 local udim2 = UDim2.new;
 local udim = UDim.new;
