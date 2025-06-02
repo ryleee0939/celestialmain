@@ -1,25 +1,25 @@
-local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/framework.lua", true))();
+local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/ryleee0939/Vanta.devmain/refs/heads/main/framework.lua", true))();
 --
 do -- checks
     do -- folders
-        if (not isfolder("Celestial")) then
-            makefolder("Celestial");
+        if (not isfolder("Vanta.dev")) then
+            makefolder("Vanta.dev");
         end;
         --
         if (not isfolder("CONFIGS")) then
             makefolder("CONFIGS");
         end;
         --
-        if (not isfolder("Celestial/MENU")) then
-            makefolder("Celestial/MENU");
+        if (not isfolder("Vanta.dev/MENU")) then
+            makefolder("Vanta.dev/MENU");
         end;
         --
-        if (not isfolder("Celestial/MENU/FONTS")) then
-            makefolder("Celestial/MENU/FONTS");
+        if (not isfolder("Vanta.dev/MENU/FONTS")) then
+            makefolder("Vanta.dev/MENU/FONTS");
         end;
         --
-        if (not isfolder("Celestial/LOADER/IMAGES")) then
-            makefolder("Celestial/LOADER/IMAGES");
+        if (not isfolder("Vanta.dev/LOADER/IMAGES")) then
+            makefolder("Vanta.dev/LOADER/IMAGES");
         end;
     end;
 end;
@@ -61,25 +61,25 @@ signals = framework.modules.signals
 -- fonts
 local create_font = loadstring(game:HttpGet("https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/fonts.lua"))();
 local fonts = {
-    smallest_pixel = create_font:register("Celestial/MENU/FONTS", {
+    smallest_pixel = create_font:register("Vanta.dev/MENU/FONTS", {
         name = "smallest pixel",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/smallest_pixel-7.ttf",
     }),
-    templeos = create_font:register("Celestial/MENU/FONTS", {
+    templeos = create_font:register("Vanta.dev/MENU/FONTS", {
         name = "templeos",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/smallest_pixel-7.ttf",
     }),
-    proggytiny = create_font:register("Celestial/MENU/FONTS", {
+    proggytiny = create_font:register("Vanta.dev/MENU/FONTS", {
         name = "proggytiny",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/ProggyTiny.ttf",
     }),
-    medodica = create_font:register("Celestial/MENU/FONTS", {
+    medodica = create_font:register("Vanta.dev/MENU/FONTS", {
         name = "medodica",
         weight = "regular",
         style = "normal",
@@ -98,7 +98,7 @@ local UI = ({
     keybind_list = nil,
     themes = {
         Default = {
-            accent = color3_rgb(189, 172, 255),
+            accent = color3_rgb(255, 143, 214),
             risky = color3_rgb(200, 0, 0),
             background = color3_rgb(17, 17, 17),
             outline = color3_rgb(27, 27, 27),
@@ -347,7 +347,7 @@ do -- other
     blur_effect = cloneref(Instance.new("BlurEffect", lighting));
     black_bg = Instance_manager.new("TextButton", {
         Name = "bg_effect";
-        Text = "CELESTIAL.PUB";
+        Text = "Vanta.dev.PUB";
         AutoButtonColor = false;
         Size = udim2(9999, 0, 9999, 0);
         BorderColor3 = UI.themes.outline;
@@ -1043,7 +1043,7 @@ do -- menu
     do -- window
         function UI:window(options)
             local window = {
-                name = (options.Name or options.name or " Celestial");
+                name = (options.Name or options.name or " Vanta.dev");
                 size = (options.Size or options.size or udim2(0, 750, 0, 500));
                 position = (options.position == "left" and Enum.TextXAlignment.Left) or (options.position == "center" and Enum.TextXAlignment.Center) or (options.position == "right" and Enum.TextXAlignment.Right) or Enum.TextXAlignment.Left,
                 dragging = { false, udim2(0, 0, 0, 0) };
@@ -3173,7 +3173,7 @@ do -- open/close
     end);
 end;
 --
-local watermark = UI:watermark({ name = 'Celestial' });
+local watermark = UI:watermark({ name = 'Vanta.dev' });
 
 function UI:Configs(tab)
     tab:textbox({ flag = "cfg_name", name = "config name" });
@@ -3297,7 +3297,7 @@ framework.modules.signals.connection(run_service["RenderStepped"], function(dt)
             local user_type = (LPH_OBFUSCATED and "Public") or "Developer";  -- Set the user type here
     
             watermark:update_text(string.format(
-                'Celestial | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">%s</font>', 
+                'Vanta.dev | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">%s</font>', 
                 accent, avg_ping, accent, avg_fps, accent, display_game, accent, user_type
             ));
         end;
