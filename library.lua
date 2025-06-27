@@ -2,24 +2,24 @@ local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/ryl
 --
 do -- checks
     do -- folders
-        if (not isfolder("Vanta.dev")) then
-            makefolder("Vanta.dev");
+        if (not isfolder("Insolence")) then
+            makefolder("Insolence");
         end;
         --
         if (not isfolder("CONFIGS")) then
             makefolder("CONFIGS");
         end;
         --
-        if (not isfolder("Vanta.dev/MENU")) then
-            makefolder("Vanta.dev/MENU");
+        if (not isfolder("Insolence/MENU")) then
+            makefolder("Insolence/MENU");
         end;
         --
-        if (not isfolder("Vanta.dev/MENU/FONTS")) then
-            makefolder("Vanta.dev/MENU/FONTS");
+        if (not isfolder("Insolence/MENU/FONTS")) then
+            makefolder("Insolence/MENU/FONTS");
         end;
         --
-        if (not isfolder("Vanta.dev/LOADER/IMAGES")) then
-            makefolder("Vanta.dev/LOADER/IMAGES");
+        if (not isfolder("Insolence/LOADER/IMAGES")) then
+            makefolder("Insolence/LOADER/IMAGES");
         end;
     end;
 end;
@@ -62,25 +62,25 @@ signals = framework.modules.signals
 -- fonts
 local create_font = loadstring(game:HttpGet("https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/fonts.lua"))();
 local fonts = {
-    smallest_pixel = create_font:register("Vanta.dev/MENU/FONTS", {
+    smallest_pixel = create_font:register("Insolence/MENU/FONTS", {
         name = "smallest pixel",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/judghementday2/bypass/refs/heads/main/smallest_pixel-7.ttf",
     }),
-    templeos = create_font:register("Vanta.dev/MENU/FONTS", {
+    templeos = create_font:register("Insolence/MENU/FONTS", {
         name = "templeos",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/smallest_pixel-7.ttf",
     }),
-    proggytiny = create_font:register("Vanta.dev/MENU/FONTS", {
+    proggytiny = create_font:register("Insolence/MENU/FONTS", {
         name = "proggytiny",
         weight = "regular",
         style = "normal",
         link = "https://raw.githubusercontent.com/ryleee0939/celestialmain/refs/heads/main/ProggyTiny.ttf",
     }),
-    medodica = create_font:register("Vanta.dev/MENU/FONTS", {
+    medodica = create_font:register("Insolence/MENU/FONTS", {
         name = "medodica",
         weight = "regular",
         style = "normal",
@@ -348,7 +348,7 @@ do -- other
     blur_effect = cloneref(Instance.new("BlurEffect", lighting));
     black_bg = Instance_manager.new("TextButton", {
         Name = "bg_effect";
-        Text = "Vanta.dev.PUB";
+        Text = "Insolence.PUB";
         AutoButtonColor = false;
         Size = udim2(9999, 0, 9999, 0);
         BorderColor3 = UI.themes.outline;
@@ -1044,7 +1044,7 @@ do -- menu
     do -- window
         function UI:window(options)
             local window = {
-                name = (options.Name or options.name or " Vanta.dev");
+                name = (options.Name or options.name or " Insolence");
                 size = (options.Size or options.size or udim2(0, 750, 0, 500));
                 position = (options.position == "left" and Enum.TextXAlignment.Left) or (options.position == "center" and Enum.TextXAlignment.Center) or (options.position == "right" and Enum.TextXAlignment.Right) or Enum.TextXAlignment.Left,
                 dragging = { false, udim2(0, 0, 0, 0) };
@@ -3174,7 +3174,7 @@ do -- open/close
     end);
 end;
 --
-local watermark = UI:watermark({ name = 'Vanta.dev' });
+local watermark = UI:watermark({ name = 'Insolence' });
 
 function UI:Configs(tab)
     tab:textbox({ flag = "cfg_name", name = "config name" });
@@ -3298,7 +3298,7 @@ framework.modules.signals.connection(run_service["RenderStepped"], function(dt)
             local user_type = (LPH_OBFUSCATED and "Public") or "Developer";  -- Set the user type here
     
             watermark:update_text(string.format(
-                'Vanta.dev | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">%s</font>', 
+                'Insolence | PING <font color="%s">%d</font> | FPS <font color="%s">%d</font> | Build <font color="%s">%s</font> | User <font color="%s">%s</font>', 
                 accent, avg_ping, accent, avg_fps, accent, display_game, accent, user_type
             ));
         end;
